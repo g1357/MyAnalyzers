@@ -29,9 +29,9 @@ namespace MyAnalyzers.Tests.Analyzers
         }
 
         [Fact]
-        public async Task NoDiagnostic_WhenInterfaceHasOnlyI()
+        public async Task Diagnostic_WhenInterfaceIsJustI()
         {
-            // "I" alone is not valid (needs uppercase after I), but our check requires 2 chars
+            // "I" alone fails validation: IsInterfaceCase requires length >= 2 with an uppercase second char
             var code = @"public interface {|MYAN0001:I|} { }";
             await VerifyCS.VerifyAnalyzerAsync(code);
         }
